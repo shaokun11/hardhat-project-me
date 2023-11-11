@@ -7,7 +7,7 @@ module.exports = {
   networks: {
     m1: {
       url: "https://mevm.movementlabs.xyz/v1/",
-      accounts: [PRIVATE_KEY],
+      accounts: [process.env.PRIVATE_KEY],
       chainId: 336,
       gasPrice: "auto",
     },
