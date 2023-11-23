@@ -9,5 +9,6 @@ npx hardhat help
 npx hardhat test
 REPORT_GAS=true npx hardhat test
 npx hardhat node
-npx hardhat run scripts/deploy.js
+npx hardhat run scripts/deploy.js --network m1
+npx hardhat run scripts/withdraw.js --network m1
 ```

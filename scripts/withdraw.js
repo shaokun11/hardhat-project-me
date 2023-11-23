@@ -7,29 +7,25 @@
 const hre = require("hardhat");
 
 async function main() {
-    const lockAddress = "<lockAddress>";
-    const deployer = await hre.ethers.getSigner();
+    const lockAddress = "0xA4cD3b0Eb6E5Ab5d8CE4065BcCD70040ADAB1F00";
+    const [deployer] = await hre.ethers.getSigners();
     const lockedAmount = await hre.ethers.provider.getBalance(lockAddress);
-    const currentBalance = await hre.ethers.provider.getBalance.getBalance(deployer.address);
-    console.log(
-        `Current balance of ${deployer.address} is ${hre.ethers.utils.formatEther(currentBalance)}ETH`
-    );
-    const lock = hre.ethers.getContractAt("Lock", lockAddress);
-
+    const currentBalance = await hre.ethers.provider.getBalance(deployer.address);
+    console.log(`Current balance of ${deployer.address} is ${hre.ethers.formatEther(currentBalance)}ETH`);
+    const lock = await hre.ethers.getContractAt("Lock", lockAddress);
     const tx = await lock.withdraw();
     await tx.wait();
 
     console.log(
-        `Withdrawn ${hre.ethers.utils.formatEther(lockedAmount)}ETH from ${lockAddress} to ${deployer.address}`
+        `Withdrawn ${hre.ethers.formatEther(lockedAmount)}ETH from ${lockAddress} to ${deployer.address}`
     );
 
-    const posBalance = await hre.ethers.provider.getBalance.getBalance(deployer.address);
+    const posBalance = await hre.ethers.provider.getBalance(deployer.address);
 
     console.log(
-        `Balance after withdrawal of ${deployer.address} is ${hre.ethers.utils.formatEther(posBalance)}ETH`
+        `Balance after withdrawal of ${deployer.address} is ${hre.ethers.formatEther(posBalance)}ETH`
     );
     console.log(`sum of previous balance and withdrawn value: ${currentBalance + lockedAmount}`);
-    
 }
 
 // We recommend this pattern to be able to use async/await everywhere
